@@ -1,11 +1,15 @@
-(function(B, _, m, Pikaday, $) {
-  var args = Array.prototype.slice.call(arguments);
+var deps = {
+  backbone: Backbone,
+  undersore: _,
+  moment: moment,
+  pikaday: Pikaday,
+  jquery: jQuery
+};
+var libNames = Object.keys(deps);
 
-  args.forEach(function(f) {
-    console.log(f.toString(), typeof f);
-  });
+libNames.forEach(function(libName) {
+  console.log('%s LOADED!!', libName, typeof deps[libName]);
+});
 
-  $('body').css('background', 'goldenrod');
-
-  console.log('$.cookie exists?', typeof $.cookie === 'function');
-})(Backbone, _, moment, Pikaday, jQuery);
+$('body').css('background', 'goldenrod');
+console.log('$.cookie exists?', typeof $.cookie === 'function');
