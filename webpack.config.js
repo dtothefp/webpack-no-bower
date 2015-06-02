@@ -27,8 +27,8 @@ module.exports = {
       //'moment-timezone',
       //'pikaday'
     //],
-    main: './index.js',
-    page: './page.js'
+    main: './src/index.js',
+    page: './src/page.js'
   },
   output: {
     path: join(__dirname, 'dist'),
