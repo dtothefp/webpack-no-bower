@@ -6,10 +6,13 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var plugins = [
   new webpack.ProvidePlugin({
       $: 'jquery',
+      jQuery: 'jquery',
+      'window.jquery': 'jquery',
       moment: 'moment-timezone',
       '_': 'underscore',
       Backbone: 'backbone',
-      Pikaday: 'pikaday'
+      Pikaday: 'pikaday',
+      Oform: 'oForm/src/oForm'
   }),
   //new CommonsChunkPlugin({
     //name: 'vendor',
@@ -39,10 +42,10 @@ module.exports = {
   },
   module: {
     loaders: [
-      //{
-        //test: /node_modules\/(console-polyfill|json3|es5-shim)\//,
-        //loader: 'script-loader'
-      //},
+      {
+        test: /node_modules\/oForm\//,
+        loader: 'imports?window=>{}!exports?window.Oform'
+      },
       {
         test: /\.json$/,
         loader: 'json'

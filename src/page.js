@@ -3,7 +3,8 @@ var deps = {
   undersore: _,
   moment: moment,
   pikaday: Pikaday,
-  jquery: jQuery
+  jquery: jQuery,
+  oform: Oform
 };
 var libNames = Object.keys(deps);
 
