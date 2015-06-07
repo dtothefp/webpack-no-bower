@@ -12,24 +12,28 @@ var plugins = [
       '_': 'underscore',
       Backbone: 'backbone',
       Pikaday: 'pikaday',
-      Oform: 'oForm/src/oForm'
+      Oform: 'oForm'
   }),
-  //new CommonsChunkPlugin({
-    //name: 'vendor',
-    //filename: 'commons.js',
-    //minChunks: 0
-  //})
+  new webpack.ResolverPlugin([
+    new webpack.ResolverPlugin.FileAppendPlugin(['/src/oForm.js'])
+  ]),
+  new CommonsChunkPlugin({
+    name: 'vendor',
+    filename: 'commons.js',
+    minChunks: 0
+  })
 ];
 
 module.exports = {
   entry: {
-    //vendor: [
-      //'underscore',
-      //'backbone',
-      //'mustache',
-      //'moment-timezone',
-      //'pikaday'
-    //],
+    vendor: [
+      'underscore',
+      'backbone',
+      'mustache',
+      'moment-timezone',
+      'pikaday',
+      'Oform'
+    ],
     main: './src/index.js',
     page: './src/page.js'
   },

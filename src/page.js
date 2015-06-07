@@ -9,8 +9,8 @@ var deps = {
 var libNames = Object.keys(deps);
 
 libNames.forEach(function(libName) {
-  console.log('%s LOADED!!', libName, typeof deps[libName]);
+  console.log('%c %s %s LOADED!!', 'background: #222; color: #bada55', libName, typeof deps[libName]);
 });
 
 $('body').css('background', 'goldenrod');
-console.log('$.cookie exists?', typeof $.cookie === 'function');
+console.log('%c $.cookie exists?: %s', 'background: #222; color: #bada55', typeof $.cookie === 'function');
