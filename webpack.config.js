@@ -73,7 +73,7 @@ module.exports = {
     loaders: [
       {
         test: /node_modules\/waypoints\//,
-        loader: 'imports?root=>window!exports?window.Waypoint'
+        loader: 'imports?window=>{}!exports?window.Waypoint'
       },
       {
         test: require.resolve('backbone'),
