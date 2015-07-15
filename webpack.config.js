@@ -5,21 +5,30 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 var plugins = [
   new webpack.ProvidePlugin({
+      JSON: 'JSON',
       $: 'jquery',
       jQuery: 'jquery',
-      'window.jquery': 'jquery',
       moment: 'moment-timezone',
-      '_': 'underscore',
+      'window.jquery': 'jquery',
+      'Backbone.Validation': 'backbone-validation',
+      Mustache: 'mustache',
+      '_': 'lodash',
       Backbone: 'backbone',
       Pikaday: 'pikaday',
-      Oform: 'oForm'
+      Waypoint: 'waypoints',
+      'global.moment': 'moment-timezone',
+      'global._': 'lodash',
+      'global.Backbone': 'backbone',
+      'global.Mustache': 'mustache',
+      'global.Pikaday': 'pikaday',
+      'global.Waypoint': 'waypoints'
   }),
   new webpack.ResolverPlugin([
-    new webpack.ResolverPlugin.FileAppendPlugin(['/src/oForm.js'])
+    new webpack.ResolverPlugin.FileAppendPlugin(['/src/waypoint.js'])
   ]),
   new CommonsChunkPlugin({
     name: 'vendor',
-    filename: 'commons.js',
+    filename: 'vendor.js',
     minChunks: 0
   })
 ];
@@ -27,28 +36,52 @@ var plugins = [
 module.exports = {
   entry: {
     vendor: [
-      'underscore',
-      'backbone',
+      'jquery',
+      'jquery.cookie',
+      'console-polyfill',
+      'es5-shim',
+      'json3',
       'mustache',
       'moment-timezone',
+      'lodash',
+      'backbone',
+      'backbone-validation',
       'pikaday',
-      'Oform'
+      'waypoints'
     ],
-    main: './src/index.js',
-    page: './src/page.js'
+    moment: './src/moment.js',
+    mustache: './src/mustache.js',
+    lodash: './src/lodash.js',
+    backbone: './src/backbone.js',
+    pikaday: './src/pikaday.js',
+    waypoints: './src/waypoints.js'
   },
   output: {
     path: join(__dirname, 'dist'),
     filename: '[name].js'
   },
   externals: {
-    jquery: 'jQuery'
+    jquery: 'jQuery',
+    JSON: 'JSON'
+  },
+  resolve: {
+    alias: {
+      underscore: 'lodash'
+    }
   },
   module: {
     loaders: [
       {
-        test: /node_modules\/oForm\//,
-        loader: 'imports?window=>{}!exports?window.Oform'
+        test: /node_modules\/waypoints\//,
+        loader: 'imports?root=>window!exports?window.Waypoint'
+      },
+      {
+        test: require.resolve('backbone'),
+        loader: 'expose?Backbone'
+      },
+      {
+        test: require.resolve('backbone-validation'),
+        loader: 'expose?Backbone.Validation'
       },
       {
         test: /\.json$/,
