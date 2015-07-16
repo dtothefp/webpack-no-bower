@@ -84,6 +84,7 @@ export default function(opts) {
     entry: config.entry,
     output: {
       path: join(__dirname, 'dist'),
+      publicPath: '/',
       filename: '[name].js'
     },
     externals: {
